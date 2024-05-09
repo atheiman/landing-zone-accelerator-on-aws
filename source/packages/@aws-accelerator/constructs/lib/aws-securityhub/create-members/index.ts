@@ -59,8 +59,9 @@ export async function handler(event: AWSLambda.CloudFormationCustomResourceEvent
     case 'Create':
     case 'Update':
       console.log('starting - CreateMembersCommand');
+      console.log('CUSTOMIZED CREATEMEMBERSCOMMAND WITHOUT CREATEMEMBERS API CALL');
 
-      await throttlingBackOff(() => securityHubClient.createMembers({ AccountDetails: allAccounts }).promise());
+      // await throttlingBackOff(() => securityHubClient.createMembers({ AccountDetails: allAccounts }).promise());
 
       await throttlingBackOff(() => securityHubClient.updateOrganizationConfiguration({ AutoEnable: true }).promise());
 
