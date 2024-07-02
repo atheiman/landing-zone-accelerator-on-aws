@@ -105,7 +105,9 @@ export async function handler(event: CloudFormationCustomResourceEvent): Promise
         ),
       );
 
-      await throttlingBackOff(() => securityHubClient.send(new CreateMembersCommand({ AccountDetails: allAccounts })));
+      // Temporarily disabled - this does not handle more than 50 accounts in one invocation.
+      // Accounts are added automatically with "autoEnableOrgMembers" by default
+      //await throttlingBackOff(() => securityHubClient.send(new CreateMembersCommand({ AccountDetails: allAccounts })));
 
       // Cleanup members removed from deploymentTarget
       if (securityHubMemberAccountIds.length > 0) {
